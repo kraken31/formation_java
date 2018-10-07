@@ -17,5 +17,8 @@ public class HelloWorld {
         System.out.println(v.decrisToi());
         System.out.println(v2.decrisToi()+"\n\n");
         System.out.println(v1.comparer(v2));
+
+        Capitale cap = new Capitale();
+        System.out.println(cap.decrisToi());
     }
 }
