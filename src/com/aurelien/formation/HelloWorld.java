@@ -3,22 +3,23 @@ package com.aurelien.formation;
 
 public class HelloWorld {
     public static void main(String[] args) {
-        Ville v = new Ville();
-        System.out.println("Le nombre d'instances de la classe Ville est : " + Ville.nbreInstances);
-        System.out.println("Le nombre d'instances de la classe Ville est : " + Ville.getNombreInstancesBis());
-        Ville v1 = new Ville("Marseille", 1236, "France");
-        System.out.println("Le nombre d'instances de la classe Ville est : " + Ville.nbreInstances);
-        System.out.println("Le nombre d'instances de la classe Ville est : " + Ville.getNombreInstancesBis());
-        Ville v2 = new Ville("Rio", 321654, "Brésil");
-        System.out.println("Le nombre d'instances de la classe Ville est : " + Ville.nbreInstances);
-        System.out.println("Le nombre d'instances de la classe Ville est : " + Ville.getNombreInstancesBis());
+        Ville[] tableau = new Ville[6];
 
-        System.out.println("\n\n"+v1.decrisToi());
-        System.out.println(v.decrisToi());
-        System.out.println(v2.decrisToi()+"\n\n");
-        System.out.println(v1.comparer(v2));
+        String[] tab = {"Marseille", "lille", "caen", "lyon", "paris", "nantes"};
+        int[] tab2 = {123456, 78456, 654987, 75832165, 1594, 213};
 
-        Capitale cap = new Capitale();
-        System.out.println(cap.decrisToi());
+        for (int i = 0; i < 6; i++) {
+            if (i<3) {
+                Ville V = new Ville(tab[i], tab2[i], "france");
+                tableau[i] = V;
+            } else {
+                Capitale C = new Capitale(tab[i], tab2[i], "france", "la tour Eiffel");
+                tableau[i] = C;
+            }
+        }
+
+        for (Object obj : tableau) {
+            System.out.println(obj.toString()+"\n");
+        }
     }
 }

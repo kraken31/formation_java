@@ -3,12 +3,12 @@ package com.aurelien.formation;
 public class Ville {
 
     public static int nbreInstances = 0;
-    private static int nbreInstancesBis = 0;
+    protected static int nbreInstancesBis = 0;
 
-    private String nomVille;
-    private String nomPays;
-    private int nbreHabitants;
-    private char categorie;
+    protected String nomVille;
+    protected String nomPays;
+    protected int nbreHabitants;
+    protected char categorie;
 
     // CONSTRUCTEURS
     public Ville() {
@@ -83,6 +83,10 @@ public class Ville {
 
     // Retourne la description de la ville
     public String decrisToi() {
+        return "\t"+this.nomVille+" est une ville de "+this.nomPays+", elle comporte : "+this.nbreHabitants+" habitant(s) => elle est donc de catégorie : "+this.categorie;
+    }
+
+    public String toString() {
         return "\t"+this.nomVille+" est une ville de "+this.nomPays+", elle comporte : "+this.nbreHabitants+" habitant(s) => elle est donc de catégorie : "+this.categorie;
     }
 
