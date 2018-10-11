@@ -2,7 +2,7 @@ package com.aurelien.formation;
 
 public class Chat extends Felin {
 
-    public void Chat() {}
+    public Chat() {}
 
     public Chat(String couleur, int poids) {
         this.couleur = couleur;

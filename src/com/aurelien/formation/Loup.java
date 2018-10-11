@@ -2,7 +2,7 @@ package com.aurelien.formation;
 
 public class Loup extends Canin {
 
-    public void Loup() {}
+    public Loup() {}
 
     public Loup(String couleur, int poids) {
         this.couleur = couleur;

@@ -2,7 +2,7 @@ package com.aurelien.formation;
 
 public class Tigre extends Felin {
 
-    public void Tigre() {}
+    public Tigre() {}
 
     public Tigre(String couleur, int poids) {
         this.couleur = couleur;

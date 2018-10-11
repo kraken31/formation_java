@@ -2,7 +2,7 @@ package com.aurelien.formation;
 
 public class Lion extends Felin {
 
-    public void Lion() {}
+    public Lion() {}
 
     public Lion(String couleur, int poids) {
         this.couleur = couleur;
