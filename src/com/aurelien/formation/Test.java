@@ -1,6 +1,6 @@
 package com.aurelien.formation;
 
-import com.aurelien.comportements.Operation;
+import com.aurelien.comportements.*;
 
 public class Test {
     public static void main(String[] args) {
