@@ -1,23 +1,16 @@
 package com.aurelien.formation;
 
-import com.aurelien.comportements.*;
-
 public class Test {
     public static void main(String[] args) {
-        Personnage[] tPers = {new Guerrier(), new Civil(), new Medecin()};
+        int j=20, i=0;
 
-        for (int i=0; i < tPers.length; i++) {
-            System.out.println("\nInstance de " + tPers[i].getClass().getName());
-            System.out.println("**********************************");
-            tPers[i].combattre();
-            tPers[i].seDeplacer();
-            tPers[i].soigner();
+        try {
+            System.out.println(j / i);
+        } catch (ArithmeticException e) {
+            System.out.println("Division par zéro => " + e.getMessage());
+        } finally {
+            System.out.println("Action effectuée systématiquement");
         }
-
-        Personnage pers = new Guerrier();
-        System.out.println("\nInstance de " + pers.getClass().getName());
-        pers.soigner();
-        pers.setSoin(new Operation());
-        pers.soigner();
+        System.out.println("Coucou toi");
     }
 }
