@@ -2,15 +2,16 @@ package com.aurelien.formation;
 
 public class Test {
     public static void main(String[] args) {
-        int j=20, i=0;
-
+        Ville v = null;
         try {
-            System.out.println(j / i);
-        } catch (ArithmeticException e) {
-            System.out.println("Division par zéro => " + e.getMessage());
-        } finally {
-            System.out.println("Action effectuée systématiquement");
+            v = new Ville("Re", 12000, "France");
+        } catch (NombreHabitantException | NomVilleException e2) {
+            System.out.println(e2.getMessage());
         }
-        System.out.println("Coucou toi");
+        finally {
+            if (v == null)
+                v = new Ville();
+        }
+        System.out.println(v.toString());
     }
 }
