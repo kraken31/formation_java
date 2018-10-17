@@ -1,24 +1,17 @@
 package com.aurelien.formation;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.ArrayList;
 
 public class Test {
     public static void main(String[] args) {
-        List l = new LinkedList();
-        l.add(12);
-        l.add("toto ! !");
-        l.add(12.20f);
+        ArrayList al = new ArrayList();
+        al.add(12);
+        al.add("Une chaîne de caractères !");
+        al.add(12.20f);
+        al.add(null);
+        al.add('d');
 
-        for (int i=0; i<l.size(); i++)
-            System.out.println("Elément à l'index " + i + " = " + l.get(i));
-
-        System.out.println("\nParcours avec un itérateur");
-        System.out.println("--------------------------");
-        ListIterator li = l.listIterator();
-
-        while (li.hasNext())
-            System.out.println(li.next());
+        for (int i=0; i<al.size(); i++)
+            System.out.println("Donnée à l'indice " + i + " = " + al.get(i));
     }
 }
