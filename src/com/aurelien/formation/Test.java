@@ -1,17 +1,19 @@
 package com.aurelien.formation;
 
-import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
 public class Test {
     public static void main(String[] args) {
-        ArrayList al = new ArrayList();
-        al.add(12);
-        al.add("Une chaîne de caractères !");
-        al.add(12.20f);
-        al.add(null);
-        al.add('d');
+        Hashtable ht = new Hashtable();
+        ht.put(1, "printemps");
+        ht.put(10, "été");
+        ht.put(12, "automne");
+        ht.put(45, "hiver");
 
-        for (int i=0; i<al.size(); i++)
-            System.out.println("Donnée à l'indice " + i + " = " + al.get(i));
+        Enumeration e = ht.elements();
+
+        while (e.hasMoreElements())
+            System.out.println(e.nextElement());
     }
 }
