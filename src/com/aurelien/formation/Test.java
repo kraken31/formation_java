@@ -1,19 +1,24 @@
 package com.aurelien.formation;
 
-import java.util.Enumeration;
-import java.util.Hashtable;
+import java.util.HashSet;
+import java.util.Iterator;
 
 public class Test {
     public static void main(String[] args) {
-        Hashtable ht = new Hashtable();
-        ht.put(1, "printemps");
-        ht.put(10, "été");
-        ht.put(12, "automne");
-        ht.put(45, "hiver");
+        HashSet hs = new HashSet();
+        hs.add("toto");
+        hs.add(12);
+        hs.add('d');
 
-        Enumeration e = ht.elements();
+        Iterator it = hs.iterator();
+        while (it.hasNext())
+            System.out.println(it.next());
 
-        while (e.hasMoreElements())
-            System.out.println(e.nextElement());
+        System.out.println("\nParcours avec un tableau d'objet");
+        System.out.println("--------------------------------");
+
+        Object[] obj = hs.toArray();
+        for (Object o : obj)
+            System.out.println(o);
     }
 }
