@@ -1,11 +1,24 @@
 package com.aurelien.formation;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+
 public class Test {
     public static void main(String[] args) {
-        Langage l1 = Langage.JAVA;
-        Langage l2 = Langage.PHP;
+        List l = new LinkedList();
+        l.add(12);
+        l.add("toto ! !");
+        l.add(12.20f);
 
-        l1.getEditor();
-        l2.getEditor();
+        for (int i=0; i<l.size(); i++)
+            System.out.println("Elément à l'index " + i + " = " + l.get(i));
+
+        System.out.println("\nParcours avec un itérateur");
+        System.out.println("--------------------------");
+        ListIterator li = l.listIterator();
+
+        while (li.hasNext())
+            System.out.println(li.next());
     }
 }
