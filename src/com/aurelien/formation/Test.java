@@ -5,37 +5,43 @@ import java.io.*;
 
 public class Test {
     public static void main(String[] args) {
-        FileInputStream fis;
-        FileOutputStream fos;
-        BufferedInputStream bis;
-        BufferedOutputStream bos;
+        DataInputStream dis;
+        DataOutputStream dos;
 
         try {
-            fis = new FileInputStream(new File("test.txt"));
-            fos = new FileOutputStream(new File("test2.txt"));
-            bis = new BufferedInputStream(new FileInputStream(new File("test.txt")));
-            bos = new BufferedOutputStream(new FileOutputStream(new File("test3.txt")));
-            byte[] buf = new byte[8];
+            dos = new DataOutputStream(
+                    new BufferedOutputStream(
+                            new FileOutputStream(
+                                    new File("sdz.txt")
+                            )
+                    )
+            );
 
-            long startTime = System.currentTimeMillis();
+            dos.writeBoolean(true);
+            dos.writeByte(100);
+            dos.writeChar('C');
+            dos.writeDouble(12.05);
+            dos.writeFloat(100.52f);
+            dos.writeInt(1024);
+            dos.writeLong(123456789654321L);
+            dos.writeShort(2);
+            dos.close();
 
-            while (fis.read(buf) != -1){
-                fos.write(buf);
-            }
-            System.out.println("Temps de lecture + écriture avec FileInputStream et FileOutputStream : " + (System.currentTimeMillis() - startTime));
-
-            startTime = System.currentTimeMillis();
-
-            while (bis.read(buf) != -1) {
-                bos.write(buf);
-            }
-
-            System.out.println("Temps de lecture + écriture avec BufferedInputStream et BufferedOutputStream : " + (System.currentTimeMillis() - startTime));
-
-            fis.close();
-            bis.close();
-            fos.close();
-            bos.close();
+            dis = new DataInputStream(
+                    new BufferedInputStream(
+                            new FileInputStream(
+                                    new File("sdz.txt")
+                            )
+                    )
+            );
+            System.out.println(dis.readBoolean());
+            System.out.println(dis.readByte());
+            System.out.println(dis.readChar());
+            System.out.println(dis.readDouble());
+            System.out.println(dis.readFloat());
+            System.out.println(dis.readInt());
+            System.out.println(dis.readLong());
+            System.out.println(dis.readShort());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
