@@ -1,52 +1,45 @@
 package com.aurelien.formation;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 
 
 public class Test {
     public static void main(String[] args) {
-        FileInputStream fis = null;
-        FileOutputStream fos = null;
+        FileInputStream fis;
+        FileOutputStream fos;
+        BufferedInputStream bis;
+        BufferedOutputStream bos;
 
         try {
             fis = new FileInputStream(new File("test.txt"));
             fos = new FileOutputStream(new File("test2.txt"));
-
+            bis = new BufferedInputStream(new FileInputStream(new File("test.txt")));
+            bos = new BufferedOutputStream(new FileOutputStream(new File("test3.txt")));
             byte[] buf = new byte[8];
-            int n = 0;
 
-            while ((n = fis.read(buf)) >= 0) {
+            long startTime = System.currentTimeMillis();
+
+            while (fis.read(buf) != -1){
                 fos.write(buf);
-
-                for (byte bit : buf) {
-                    System.out.print("\t" + bit + "(" + (char) bit + ")");
-                }
-                System.out.println("");
-                buf = new byte[8];
             }
-            System.out.println("Copie terminée !");
+            System.out.println("Temps de lecture + écriture avec FileInputStream et FileOutputStream : " + (System.currentTimeMillis() - startTime));
+
+            startTime = System.currentTimeMillis();
+
+            while (bis.read(buf) != -1) {
+                bos.write(buf);
+            }
+
+            System.out.println("Temps de lecture + écriture avec BufferedInputStream et BufferedOutputStream : " + (System.currentTimeMillis() - startTime));
+
+            fis.close();
+            bis.close();
+            fos.close();
+            bos.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (fis != null)
-                    fis.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                if (fos != null)
-                    fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 }
