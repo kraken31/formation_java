@@ -5,22 +5,26 @@ import java.io.*;
 
 public class Test {
     public static void main(String[] args) {
-        StringWriter sw = new StringWriter();
-        StringReader sr;
+        File file = new File("testFileWriter.txt");
+        FileWriter fw;
+        FileReader fr;
 
         try {
-            sw.write("Coucou les Zéros");
-            System.out.println(sw);
-            sw.close();
+            fw = new FileWriter(file);
+            String str = "Bonjour à tous, amis Zéros !\n";
+            str += "\tComment allez-vous ?\n";
+            fw.write(str);
+            fw.close();
 
-            sr = new StringReader(sw.toString());
-            int i;
-
-            String str = "";
-            while ((i = sr.read()) != -1)
+            fr = new FileReader(file);
+            str = "";
+            int i = 0;
+            while ((i = fr.read()) != -1)
                 str += (char) i;
 
             System.out.println(str);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
