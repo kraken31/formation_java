@@ -5,43 +5,42 @@ import java.io.*;
 
 public class Test {
     public static void main(String[] args) {
-        DataInputStream dis;
-        DataOutputStream dos;
+        ObjectInputStream ois;
+        ObjectOutputStream oos;
 
         try {
-            dos = new DataOutputStream(
+            oos = new ObjectOutputStream(
                     new BufferedOutputStream(
                             new FileOutputStream(
-                                    new File("sdz.txt")
+                                    new File("game.txt")
                             )
                     )
             );
 
-            dos.writeBoolean(true);
-            dos.writeByte(100);
-            dos.writeChar('C');
-            dos.writeDouble(12.05);
-            dos.writeFloat(100.52f);
-            dos.writeInt(1024);
-            dos.writeLong(123456789654321L);
-            dos.writeShort(2);
-            dos.close();
+            oos.writeObject(new Game("Assassin Creed", "Aventure", 45.69));
+            oos.writeObject(new Game("Tom Raider", "Plateforme", 23.45));
+            oos.writeObject(new Game("Tetris", "Stratégie", 2.50));
+            oos.close();
 
-            dis = new DataInputStream(
+            ois = new ObjectInputStream(
                     new BufferedInputStream(
                             new FileInputStream(
-                                    new File("sdz.txt")
+                                    new File("game.txt")
                             )
                     )
             );
-            System.out.println(dis.readBoolean());
-            System.out.println(dis.readByte());
-            System.out.println(dis.readChar());
-            System.out.println(dis.readDouble());
-            System.out.println(dis.readFloat());
-            System.out.println(dis.readInt());
-            System.out.println(dis.readLong());
-            System.out.println(dis.readShort());
+
+            try {
+                System.out.println("Affichage des jeux :");
+                System.out.println("********************");
+                System.out.println(((Game)ois.readObject()).toString());
+                System.out.println(((Game)ois.readObject()).toString());
+                System.out.println(((Game)ois.readObject()).toString());
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            ois.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
