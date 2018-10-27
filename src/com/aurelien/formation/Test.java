@@ -5,44 +5,22 @@ import java.io.*;
 
 public class Test {
     public static void main(String[] args) {
-        ObjectInputStream ois;
-        ObjectOutputStream oos;
+        CharArrayWriter caw = new CharArrayWriter();
+        CharArrayReader car;
 
         try {
-            oos = new ObjectOutputStream(
-                    new BufferedOutputStream(
-                            new FileOutputStream(
-                                    new File("game.txt")
-                            )
-                    )
-            );
+            caw.write("Coucou les Zéros");
+            System.out.println(caw);
+            caw.close();
 
-            oos.writeObject(new Game("Assassin Creed", "Aventure", 45.69));
-            oos.writeObject(new Game("Tom Raider", "Plateforme", 23.45));
-            oos.writeObject(new Game("Tetris", "Stratégie", 2.50));
-            oos.close();
+            car = new CharArrayReader(caw.toCharArray());
+            int i;
 
-            ois = new ObjectInputStream(
-                    new BufferedInputStream(
-                            new FileInputStream(
-                                    new File("game.txt")
-                            )
-                    )
-            );
+            String str = "";
+            while ((i = car.read()) != -1)
+                str += (char) i;
 
-            try {
-                System.out.println("Affichage des jeux :");
-                System.out.println("********************");
-                System.out.println(((Game)ois.readObject()).toString());
-                System.out.println(((Game)ois.readObject()).toString());
-                System.out.println(((Game)ois.readObject()).toString());
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-
-            ois.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println(str);
         } catch (IOException e) {
             e.printStackTrace();
         }
