@@ -5,19 +5,19 @@ import java.io.*;
 
 public class Test {
     public static void main(String[] args) {
-        CharArrayWriter caw = new CharArrayWriter();
-        CharArrayReader car;
+        StringWriter sw = new StringWriter();
+        StringReader sr;
 
         try {
-            caw.write("Coucou les Zéros");
-            System.out.println(caw);
-            caw.close();
+            sw.write("Coucou les Zéros");
+            System.out.println(sw);
+            sw.close();
 
-            car = new CharArrayReader(caw.toCharArray());
+            sr = new StringReader(sw.toString());
             int i;
 
             String str = "";
-            while ((i = car.read()) != -1)
+            while ((i = sr.read()) != -1)
                 str += (char) i;
 
             System.out.println(str);
