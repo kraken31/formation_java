@@ -1,28 +1,32 @@
 package com.aurelien.formation;
 
 import java.io.*;
-
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 
 public class Test {
     public static void main(String[] args) {
-        File file = new File("testFileWriter.txt");
-        FileWriter fw;
-        FileReader fr;
+        FileInputStream fis;
+        BufferedInputStream bis;
+        FileChannel fc;
 
         try {
-            fw = new FileWriter(file);
-            String str = "Bonjour à tous, amis Zéros !\n";
-            str += "\tComment allez-vous ?\n";
-            fw.write(str);
-            fw.close();
+            fis = new FileInputStream(new File("dictionnaire.txt"));
+            bis = new BufferedInputStream(fis);
+            long time = System.currentTimeMillis();
+            while (bis.read() != -1);
+            System.out.println("temps d'exécution avec un buffer conventionnel : " + (System.currentTimeMillis() - time));
 
-            fr = new FileReader(file);
-            str = "";
-            int i = 0;
-            while ((i = fr.read()) != -1)
-                str += (char) i;
+            fis = new FileInputStream(new File("dictionnaire.txt"));
+            fc = fis.getChannel();
+            int size = (int)fc.size();
+            ByteBuffer bBuff = ByteBuffer.allocate(size);
+            time = System.currentTimeMillis();
+            fc.read(bBuff);
+            bBuff.flip();
+            System.out.println("Temps d'exécution avec un nouveau buffer : " + (System.currentTimeMillis() - time));
 
-            System.out.println(str);
+            byte[] tabByte = bBuff.array();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
