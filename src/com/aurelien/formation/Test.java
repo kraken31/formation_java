@@ -1,44 +1,40 @@
 package com.aurelien.formation;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class Test {
     public static void main(String[] args) {
-        Class c = new String().getClass();
-        Class[] faces = c.getInterfaces();
-        Method[] m = c.getMethods();
+        String nom = Paire.class.getName();
 
-        System.out.println("Il y a " + faces.length + " interfaces implémentées");
-        for (int i = 0 ; i < faces.length; i++)
-            System.out.println(faces[i]);
+        try {
+            Class cl = Class.forName(nom);
+            Object o = cl.newInstance();
 
-        System.out.println("==========\n");
+            Class[] types = new Class[]{String.class, String.class};
+            Constructor ct = cl.getConstructor(types);
+            Object o2 = ct.newInstance(new String[]{"valeur 1", "valeur 2"});
 
-        Field[] f = c.getDeclaredFields();
-        System.out.println("Il y a " + f.length + " champs dans cette classe");
-        for (int i = 0 ; i < f.length; i++)
-            System.out.println(f[i].getName());
+            Method m = cl.getMethod("toString", null);
 
-        System.out.println("==========\n");
-
-        Constructor[] construc = c.getConstructors();
-        System.out.println("Il y a " + construc.length + " constructeur dans cette classe");
-        for (int i = 0 ; i < construc.length; i++)
-            System.out.println(construc[i]);
-
-        System.out.println("==========\n");
-
-        System.out.println("Il y a " + m.length + " méthodes dans cette classe");
-        for (int i = 0 ; i < m.length; i++) {
-            System.out.println(m[i]);
-
-            Class[]p = m[i].getParameterTypes();
-            for (int j = 0; j < p.length; j++)
-                System.out.println(p[j].getName());
-
-            System.out.println("----------------------------\n");
+            System.out.println("----------------------------------------");
+            System.out.println("Méthode " + m.getName() + " sur o2: " + m.invoke(o2, null));
+            System.out.println("Méthode " + m.getName() + " sur o: " + m.invoke(o, null));
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
         }
     }
 }
